@@ -5,7 +5,7 @@ const construct = el => {
   // Because the following attributes are set only when the widget is constructed, they won't respond to subsequent changes.
 
   el.redraw = () => {
-    lineEls[0].x1 = lineEls[0].y1 = 50; lineEls[0].x2= lineEls[0].y2 = 250;
+    //lineEls[0].x1 = lineEls[0].y1 = 50; lineEls[0].x2= lineEls[0].y2 = 250;
   }
 
   Object.defineProperty(el, 'strokeWidth', {
@@ -26,11 +26,28 @@ const construct = el => {
 
       switch(attributeName) {
         case 'stroke-width':
-          console.log(`stroke-width=${attributeValue}`)
           el.strokeWidth = Number(attributeValue);
           break;
         case 'points':
-          console.log(`points=${attributeValue}`)
+          const coords = attributeValue.split(/[ ,]/);
+          const lineCount = Math.floor(coords.length / 2) - 1
+          // TODO 9 should do some range-checking!
+          console.log(`len=${coords.length} lineCount=${lineCount}`)
+          let lineIndex = 0, x, y
+          for (let i = 0; i < coords.length; i += 2) {
+            x = Number(coords[i]); y = Number(coords[i + 1]);
+            if (lineIndex < lineCount) {
+              lineEls[lineIndex].x1 = x; lineEls[lineIndex].y1 = y;
+            }
+            if (lineIndex) {
+              lineEls[lineIndex-1].x2 = x; lineEls[lineIndex-1].y2 = y;
+            }
+            lineIndex++;
+          }
+          // Hide unused line segments:
+          for (let i = 0; i < lineEls.length; i++)
+            lineEls[i].style.display = i < lineCount? 'inline' : 'none';
+
           break;
       }
     })
@@ -45,3 +62,4 @@ const construct = el => {
 }
 
 constructWidgets('polyline4', construct);
+// TODO 2 try cap = butt
