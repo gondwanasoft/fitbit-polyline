@@ -1,0 +1,9 @@
+<defs>
+  <symbol id="polyline4" type="polyline4" class="widget-auto" >
+    <line />
+    <line />
+    <line />
+    <line />
+    <text id="config" display="none" />
+  </symbol>
+</defs>
