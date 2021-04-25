@@ -1,5 +1,5 @@
 <defs>
-  <symbol id="polyline4" type="polyline4" class="widget-auto" >
+  <symbol id="polyline4" type="polyline4" class="widget-auto polyline" >
     <line />
     <line />
     <line />

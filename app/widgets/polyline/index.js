@@ -2,21 +2,42 @@ import { constructWidgets } from '../construct-widgets';
 
 const construct = el => {
   const lineEls = el.getElementsByTagName('line');
+  let lineCount = 0;    // number of visible line segments
   // Because the following attributes are set only when the widget is constructed, they won't respond to subsequent changes.
 
-  el.redraw = () => {
-    //lineEls[0].x1 = lineEls[0].y1 = 50; lineEls[0].x2= lineEls[0].y2 = 250;
+  const _setPoint = (index, x, y) => {
+    // Doesn't update line display.
+    if (index < lineEls.length) {
+      lineEls[index].x1 = x; lineEls[index].y1 = y;
+    }
+    if (index) {
+      lineEls[index-1].x2 = x; lineEls[index-1].y2 = y;
+    }
+  }
+
+  const _setLineCount = newLineCount => {
+    //console.log(`lineCount=${lineCount}`)
+    // Unhide newly-used line segments:
+    for (let i = lineCount; i < newLineCount; i++)
+      lineEls[i].style.display = 'inline';
+
+    lineCount = newLineCount;
+  }
+
+  el.setPoint = (index, x, y) => {
+    _setPoint(index, x, y);
+    if (index > lineCount) _setLineCount(index);
   }
 
   Object.defineProperty(el, 'strokeWidth', {
     set: function(newValue) {
       lineEls.forEach(line => {line.style.strokeWidth = newValue;});
-      el.redraw();
     }
   })
 
-  const doConfig = configEl => {
-    const attributes = configEl.text.split(';')
+  ;(function() {       //initialisation IIFE
+    // Parse and process config attributes:
+    const attributes = el.getElementById('config').text.split(';')
     console.log(`config=${attributes}`)
     attributes.forEach(attribute => {
       const colonIndex = attribute.indexOf(':')
@@ -30,36 +51,18 @@ const construct = el => {
           break;
         case 'points':
           const coords = attributeValue.split(/[ ,]/);
-          const lineCount = Math.floor(coords.length / 2) - 1
           // TODO 9 should do some range-checking!
-          console.log(`len=${coords.length} lineCount=${lineCount}`)
-          let lineIndex = 0, x, y
-          for (let i = 0; i < coords.length; i += 2) {
-            x = Number(coords[i]); y = Number(coords[i + 1]);
-            if (lineIndex < lineCount) {
-              lineEls[lineIndex].x1 = x; lineEls[lineIndex].y1 = y;
-            }
-            if (lineIndex) {
-              lineEls[lineIndex-1].x2 = x; lineEls[lineIndex-1].y2 = y;
-            }
-            lineIndex++;
+          let pointIndex = 0, x, y
+          for (let coordIndex = 0; coordIndex < coords.length; coordIndex += 2) {
+            x = Number(coords[coordIndex]); y = Number(coords[coordIndex + 1]);
+            _setPoint(pointIndex++, x, y);
           }
-          // Hide unused line segments:
-          for (let i = 0; i < lineEls.length; i++)
-            lineEls[i].style.display = i < lineCount? 'inline' : 'none';
-
+          _setLineCount(Math.floor(coords.length / 2) - 1);
           break;
       }
     })
-  }
-
-  ;(function() {       //initialisation IIFE
-    const configEl = el.getElementById('config');
-    if (configEl) doConfig(configEl);
-
-    el.redraw();
   })()
 }
 
 constructWidgets('polyline4', construct);
-// TODO 2 try cap = butt
+// TODO 2.5 try cap = butt
