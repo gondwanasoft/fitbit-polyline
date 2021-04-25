@@ -16,4 +16,15 @@
     <use href="#polylineLines" />
     <text id="config" display="none" />
   </symbol>
+
+  <symbol id="polygon4" type="polygon4" class="widget-auto polyline" >
+    <use href="#polylineLines" />
+    <text id="config" display="none" />
+  </symbol>
+
+  <symbol id="polygon8" type="polygon8" class="widget-auto polyline" >
+    <use href="#polylineLines" />
+    <use href="#polylineLines" />
+    <text id="config" display="none" />
+  </symbol>
 </defs>

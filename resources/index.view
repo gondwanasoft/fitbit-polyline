@@ -1,9 +1,17 @@
 <svg>
   <use id="myPolyline4" href="#polyline4" x="50" y="50" >
-    <set href="#config" attributeName="text-buffer" to="stroke-width: 30; points: 200,0 200,200 100,100" />
+    <set href="#config" attributeName="text-buffer" to="stroke-width: 30; points: 100,0 100,100 50,100" />
   </use>
 
-  <use id="myPolyline8" href="#polyline8" x="50" y="168" >
+  <use id="myPolyline8" href="#polyline8" x="168" y="50" >
     <set href="#config" attributeName="text-buffer" to="stroke-width: 10; points: 0,0 100,0 100,100 0,100 0,50 50,50" />
+  </use>
+
+  <use id="myPolygon4" href="#polygon4" x="50" y="168" fill="yellow" >
+    <set href="#config" attributeName="text-buffer" to="stroke-width: 20; points: 0,100 100,100 50,0" />
+  </use>
+
+  <use id="myPolygon8" href="#polygon8" x="168" y="168" fill="blue" >
+    <set href="#config" attributeName="text-buffer" to="stroke-width: 5; points: 0,100 100,100 50,0" />
   </use>
 </svg>
