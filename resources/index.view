@@ -1,6 +1,5 @@
 <svg>
   <use id="myPolyline" href="#polyline4" x="50" y="50" >
-    <!--<set href="#config" attributeName="text-buffer" to="stroke-width: 30; points: 0,0 200,0 200,200 0,200 0,100" />-->
     <set href="#config" attributeName="text-buffer" to="stroke-width: 30; points: 200,0 200,200 100,100" />
   </use>
 </svg>

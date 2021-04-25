@@ -65,4 +65,3 @@ const construct = el => {
 }
 
 constructWidgets('polyline4', construct);
-// TODO 2.5 try cap = butt

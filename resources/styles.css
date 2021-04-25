@@ -1,3 +1,7 @@
 #myPolyline {
   fill: green;
 }
+
+#myPolyline line {
+  /*stroke-linecap: butt;*/   /* this works, but can result in jagged joins */
+}

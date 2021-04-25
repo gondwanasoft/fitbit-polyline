@@ -1,3 +1,4 @@
 .polyline line {
+  stroke-linecap: round;
   display: none;
 }
