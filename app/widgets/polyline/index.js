@@ -16,7 +16,6 @@ const construct = el => {
   }
 
   const _setLineCount = newLineCount => {
-    //console.log(`lineCount=${lineCount}`)
     // Unhide newly-used line segments:
     for (let i = lineCount; i < newLineCount; i++)
       lineEls[i].style.display = 'inline';
@@ -65,3 +64,4 @@ const construct = el => {
 }
 
 constructWidgets('polyline4', construct);
+constructWidgets('polyline8', construct);

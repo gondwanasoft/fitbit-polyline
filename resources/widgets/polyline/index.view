@@ -1,9 +1,19 @@
 <defs>
+  <symbol id="polylineLines" >
+    <line />
+    <line />
+    <line />
+    <line />
+  </symbol>
+
   <symbol id="polyline4" type="polyline4" class="widget-auto polyline" >
-    <line />
-    <line />
-    <line />
-    <line />
+    <use href="#polylineLines" />
+    <text id="config" display="none" />
+  </symbol>
+
+  <symbol id="polyline8" type="polyline8" class="widget-auto polyline" >
+    <use href="#polylineLines" />
+    <use href="#polylineLines" />
     <text id="config" display="none" />
   </symbol>
 </defs>

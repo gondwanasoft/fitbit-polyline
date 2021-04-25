@@ -1,7 +1,11 @@
-#myPolyline {
+#myPolyline4 {
   fill: green;
 }
 
-#myPolyline line {
+#myPolyline4 line {
   /*stroke-linecap: butt;*/   /* this works, but can result in jagged joins */
+}
+
+#myPolyline8 {
+  fill: red;
 }
