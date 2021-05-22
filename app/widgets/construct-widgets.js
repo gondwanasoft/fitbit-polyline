@@ -5,11 +5,13 @@ export const constructWidgets = (widgetType, construct) => {
   // TODO 9 it's inefficient to search all of document; could there be a better way? manually-callable function to construct, that takes an arg? className in elements that contain widgets?
   const widgets = document.getElementsByTypeName(widgetType);
   widgets.forEach(widget => {
-    const classes = widget.class.split(' ');  // array of all class names
-    if (classes.indexOf('widget-auto') >= 0) {
-      widget.class = widget.class;    // bring forward (ie, trigger) application of CSS styles
-      construct(widget);
-      // TODO 9 distinguish between 'construct' (add members to el) and 'draw' (lay out visible elements)
+    if (widget.id !== widget.type) {    // old firmware will find the <use> AND the <symbol> for each widget instance
+      const classes = widget.class.split(' ');  // array of all class names
+      if (classes.indexOf('widget-auto') >= 0) {
+        widget.class = widget.class;    // bring forward (ie, trigger) application of CSS styles
+        construct(widget);
+        // TODO 9 distinguish between 'construct' (add members to el) and 'draw' (lay out visible elements)
+      }
     }
   });
 }
