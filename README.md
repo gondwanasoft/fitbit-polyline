@@ -28,10 +28,9 @@ Features of this approach include:
 
 * To achieve the equivalent of `protected` members (_ie_, members that can be accessed by subclasses but not publicly), the polygon object uses a reference (`_polyline`) to the polyline object. This allows polygon to access members such as `_polyline._lineEls`.
 
-* Other than having its prototype changed, the original object (`el`) is not modified; neither is any other Fitbit API object modified.
+* Other than having its prototype changed, the original object (`el`) is not modified; neither is any other Fitbit API object modified. Even this change could be avoided by putting the widget-specific object(s) _on top of_ `el` rather than below it, but in this case `getElementById()` would not return the wiget object(s) so additional coding would be required to make the widget members accessible.
 
 A function called `dumpProperties()` is used to list enumerable members in the prototype chain of a polygon element. The output (with object and interface names added manually) is:
-
 
 ```
 Members (level 0):                    (instance)
